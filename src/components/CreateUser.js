@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import axios from '../api/axios';
 import './UserManagement.css'; 
 import AppBar from './AppBar';
+import { useNavigate } from "react-router-dom";
 
 const LOGIN_ENDPOINT = 'http://localhost:8080/user/createuser';
 
@@ -17,6 +18,7 @@ const CreateUser = () => {
     const pwdRef = useRef();
     const userTypeRef = useRef();
     const errRef = useRef();
+    const navigate = useNavigate();
 
     const [user, setUser] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -105,11 +107,14 @@ const CreateUser = () => {
             errRef.current.focus();
         }
     };
-    
+    const handleCancel = () => {
+        navigate('/manage-user', { replace: true }); // Navigates back to Manage Users
+    };
 
     return (
         <div>
             <AppBar title={"Create User"}/>
+            <button style={{marginLeft: "20px"}} type="button" className="btn-submit" onClick={handleCancel}>Back</button>
             <div className="create-user-container">            
             <h1 className="create-user-title">Fill in the User Details</h1>
             <form onSubmit={handleSubmit}>

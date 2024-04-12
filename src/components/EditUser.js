@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import AppBar from './AppBar';
+import './UserManagement.css'; 
 
 const UPDATE_ENDPOINT = 'http://localhost:8080/user/update/';
 
@@ -71,7 +72,7 @@ const EditUser = () => {
       await axios.put(`${UPDATE_ENDPOINT}${username}`, JSON.stringify(userData), {
         headers: { 'Content-Type': 'application/json' }
       });
-      navigate('/manage-users');
+      navigate('/manage-users', { replace: true });
     } catch (err) {
         console.error(err); // Debugging line to check the error
 
@@ -84,6 +85,10 @@ const EditUser = () => {
         }
         errRef.current.focus();
     }
+  };
+
+  const handleCancel = () => {
+    navigate('/manage-users', { replace: true }); // Navigates back to Manage Users
   };
 
   return (
@@ -190,6 +195,7 @@ const EditUser = () => {
                     )}
                 </div>
                 <button type="submit" className="btn-submit" disabled={!validEmail || (updatePassword && !validPwd) || !firstName || !lastName || !userType}>Update</button>
+                <button type="button" className="btn-submit" onClick={handleCancel}>Cancel</button>
                 <p ref={errRef} className={`errmsg ${errMsg ? "visible" : "offscreen"}`} aria-live="assertive">
                 {errMsg}
                 </p>

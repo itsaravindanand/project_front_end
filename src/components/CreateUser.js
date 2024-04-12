@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from '../api/axios';
+import './UserManagement.css'; 
+import AppBar from './AppBar';
 
 const LOGIN_ENDPOINT = 'http://localhost:8080/user/createuser';
 
@@ -106,49 +108,64 @@ const CreateUser = () => {
     
 
     return (
-        <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Create User</h1>
+        <div>
+            <AppBar title={"Create User"}/>
+            <div className="create-user-container">            
+            <h1 className="create-user-title">Fill in the User Details</h1>
             <form onSubmit={handleSubmit}>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" ref={userRef} onChange={(e) => setUser(e.target.value)} value={user} required aria-invalid={!validUser} style={{ borderColor: validUser ? 'green' : 'red' }}/>
-                    <span className="instructions">4 to 24 characters. Must begin with a letter. Letters, numbers, underscores, hyphens allowed.</span>
+                    <input type="text" id="username" ref={userRef} onChange={(e) => setUser(e.target.value)} value={user} required aria-invalid={!validUser} style={{ borderWidth: 5,borderColor: validUser ? 'green' : 'red' }}/>
+                    <span className="input-instructions">
+                        <p>
+                        4 to 24 characters. <br />
+                        Must begin with a letter. Letters, numbers, underscores, hyphens allowed.
+                        </p></span>
                 </div>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="firstname">Firstname:</label>
-                    <input type="text" id="firstname" ref={firstNameRef} onChange={(e) => setFirstName(e.target.value)} value={firstName} required aria-invalid={!validFirstName} style={{ borderColor: validFirstName ? 'green' : 'red' }}/>
+                    <input type="text" id="firstname" ref={firstNameRef} onChange={(e) => setFirstName(e.target.value)} value={firstName} required aria-invalid={!validFirstName} style={{ borderWidth: 5, borderColor: validFirstName ? 'green' : 'red' }}/>
                 </div>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="lastname">Lastname:</label>
-                    <input type="text" id="lastname" ref={lastNameRef} onChange={(e) => setLastName(e.target.value)} value={lastName} required aria-invalid={!validLastName} style={{ borderColor: validLastName ? 'green' : 'red' }}/>
+                    <input type="text" id="lastname" ref={lastNameRef} onChange={(e) => setLastName(e.target.value)} value={lastName} required aria-invalid={!validLastName} style={{ borderWidth: 5, borderColor: validLastName ? 'green' : 'red' }}/>
                 </div>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" ref={emailRef} onChange={(e) => setEmail(e.target.value)} value={email} required aria-invalid={!validEmail} style={{ borderColor: validEmail ? 'green' : 'red' }}/>
-                    <span className="instructions">Enter a valid email address.</span>
+                    <input type="email" id="email" ref={emailRef} onChange={(e) => setEmail(e.target.value)} value={email} required aria-invalid={!validEmail} style={{ borderWidth: 5, borderColor: validEmail ? 'green' : 'red' }}/>
+                    <span className="input-instructions">Enter a valid email address.</span>
                 </div>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" ref={pwdRef} onChange={(e) => setPwd(e.target.value)} value={pwd} required aria-invalid={!validPwd} style={{ borderColor: validPwd ? 'green' : 'red' }}/>
-                    <span className="instructions">8 to 24 characters. Must include uppercase and lowercase letters, a number, and a special character. Allowed special characters: ! @ # $ %</span>
+                    <input type="password" id="password" ref={pwdRef} onChange={(e) => setPwd(e.target.value)} value={pwd} required aria-invalid={!validPwd} style={{ borderWidth: 5, borderColor: validPwd ? 'green' : 'red' }}/>
+                    <span className="input-instructions">
+                        <p>
+                        8 to 24 characters. <br />
+                        Must include uppercase and lowercase letters, a number, and a special character. <br />
+                        Allowed special characters: ! @ # $ %
+                        </p>
+                        </span>
                 </div>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="confirm_pwd">Confirm Password:</label>
-                    <input type="password" id="confirm_pwd" onChange={(e) => setMatchPwd(e.target.value)} value={matchPwd} required aria-invalid={!validMatch} style={{ borderColor: validMatch ? 'green' : 'red' }}/>
+                    <input type="password" id="confirm_pwd" onChange={(e) => setMatchPwd(e.target.value)} value={matchPwd} required aria-invalid={!validMatch} style={{ borderWidth: 5, borderColor: validMatch ? 'green' : 'red' }}/>
                 </div>
-                <div className="input-group">
+                <div className="form-group">
                     <label htmlFor="userType">User Type:</label>
                     <select id="userType" ref={userTypeRef} onChange={(e) => setUserType(e.target.value)} value={userType} required>
-                        <option value="">Select User Type</option>
-                        <option value="tester">Tester</option>
-                        <option value="developer">Developer</option>
-                        <option value="manager">Manager</option>
+                        <option style={{fontFamily:"monospace"}} value="">Select User Type</option>
+                        <option style={{fontFamily:"monospace"}} value="tester">Tester</option>
+                        <option style={{fontFamily:"monospace"}} value="developer">Developer</option>
+                        <option style={{fontFamily:"monospace"}} value="manager">Manager</option>
                     </select>
                 </div>
-                <button type="submit" disabled={!validUser || !validFirstName || !validLastName || !validEmail || !validPwd || !validMatch || !userType}>Sign Up</button>
+                <button type="submit" className="btn-submit" disabled={!validUser || !validFirstName || !validLastName || !validEmail || !validPwd || !validMatch || !userType}>Create User</button>
+                <p ref={errRef} className={`errmsg ${errMsg ? "visible" : "offscreen"}`} aria-live="assertive">
+                {errMsg}
+                </p>
             </form>                    
-        </section>
+            </div>
+        </div>
     );
 };
 

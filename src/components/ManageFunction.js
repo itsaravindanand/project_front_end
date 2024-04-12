@@ -24,7 +24,7 @@ function ManageFunction() {
   }, []);
 
   return (
-    <div className="app">
+    <div>
       <AppBar title={"Manage Functions"}/>
       <AddFunction onAddFunction={fetchFunctions}/>
       <DisplayFunction functionList={functionList} fetchFunctions={fetchFunctions} />

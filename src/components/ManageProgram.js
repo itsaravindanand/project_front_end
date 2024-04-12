@@ -25,7 +25,7 @@ function ManageProgram() {
   }, []);
 
   return (
-    <div className="app">
+    <div>
       <AppBar title={"Manage Programs"}/>
       <AddProgram onAddProgram={fetchPrograms}/>
       <DisplayProgram programList={programList} fetchPrograms={fetchPrograms} />

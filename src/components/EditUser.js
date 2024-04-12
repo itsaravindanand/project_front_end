@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import axios from '../api/axios';
+import AppBar from './AppBar'; 
 
 const UPDATE_ENDPOINT = 'http://localhost:8080/user/update/'; // Endpoint for user update
 
@@ -80,8 +81,8 @@ const EditUser = () => {
 
   return (
         <section>
+            <AppBar title="Edit User" /> 
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Edit User</h1>
             <form onSubmit={handleSubmit}>
                 {/* Username Display */}
                 <div>

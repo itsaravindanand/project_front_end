@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Import for navigation
+import AppBar from './AppBar'; 
 
 export default function ManageUser() {
   const [userList, setUserList] = useState([]);
@@ -45,10 +46,9 @@ export default function ManageUser() {
   ];
 
   return (
-    <div style={{ height: 400, width: '100%', margin: 'auto' }}>
-      <Typography variant="h4" sx={{ textAlign: 'center', m: 2 }}>
-        User Management
-      </Typography>
+    <div>
+      <AppBar title="Users Management" /> 
+        <div style={{ height: 400, width: '100%', margin: 'auto' }}>
       <DataGrid
         rows={userList}
         columns={columns}
@@ -58,16 +58,21 @@ export default function ManageUser() {
         onRowSelectionModelChange={setSelectionModel}
         rowSelectionModel={selectionModel}
       />
+      <Typography variant="overline" component="h1" sx={{ width: '100%' }}>
+        Select Program(s) to delete
+      </Typography>
       <Button
         variant="outlined"
         color="error"
         onClick={handleDelete}
         disabled={selectionModel.length === 0}
         sx={{ m: 2 }}
-      >
+      >        
         Delete Selected User(s)
       </Button>
     </div>
+    </div>
+    
   );
 }
 

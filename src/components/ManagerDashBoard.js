@@ -31,7 +31,7 @@ const ManagerDashboard = () => {
             <button style={buttonStyle} onClick={() => navigate('/create-bug')}>Create Bug</button>
             <button style={buttonStyle} onClick={() => navigate('/manage-program')}>Manage Program</button>
             <button style={buttonStyle} onClick={() => navigate('/manage-function')}>Manage Function</button>
-            <button style={buttonStyle} onClick={() => navigate('/manage-user')}>Manage User</button>
+            <button style={buttonStyle} onClick={() => navigate('/manage-user')}>User Management</button>
         </div>
         </div>
     );
